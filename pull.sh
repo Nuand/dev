@@ -21,6 +21,11 @@ source $(dirname $0)/common.source
 
 for component in $REPOS
 do
+	if [[ "$component" =~ "@" ]]; then
+		linsp=(${component//@/ })
+		component=${linsp[0]}
+		who=${linsp[1]}
+	fi
 	if [ -d $component ]; then
 		echo "# pulling $component"
 		cd $component

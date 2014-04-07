@@ -21,9 +21,15 @@ source $(dirname $0)/common.source
 
 for component in $REPOS
 do
+	who=RangeNetworks
+	if [[ "$component" =~ "@" ]]; then
+		linsp=(${component//@/ })
+		component=${linsp[0]}
+		who=${linsp[1]}
+	fi
 	if [ ! -d $component ]; then
-		echo "# cloning $component"
-		sayAndDo git clone git@github.com:RangeNetworks/$component.git
+		echo "# cloning $component from $who"
+		sayAndDo git clone git@github.com:$who/$component.git
 		cd $component
 		for remote in `git branch -r | grep -v master `
 		do
