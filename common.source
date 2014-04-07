@@ -34,7 +34,7 @@ REPOS="\
 	libsqliteodbc \
 	libzmq \
 	NodeManager \
-	openbts \
+	openbts@robertghilduta \
 	smqueue \
 	sqlite3 \
 	subscriberRegistry \
