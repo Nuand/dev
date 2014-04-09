@@ -1,3 +1,37 @@
+# Nuand bladeRF specific directions #
+
+Please ensure you have a recent version (any equal to or greater than 0.14) of libbladeRF installed. Instructions on installing libbladeRF can be found here: https://github.com/Nuand/bladeRF/wiki/Getting-Started%3A-Linux
+
+Also please ensure you have the [latest FX3 firwmare](http://hoopycat.com/bladerf_builds/latest/artifacts/firmware.img) flashed to the bladeRF,  .
+
+## OpenBTS Quick Start ##
+You can follow the installation instructions found at https://github.com/RangeNetworks/dev/wiki. The only difference is that after the ./clone.sh is run, the confflags environmental variable should be set to --with-bladeRF by running `export confflags=--with-bladeRF'.
+
+1. git clone https://github.com/Nuand/dev
+2. cd dev
+3. ./clone.sh
+4. export confflags=--with-bladeRF
+5. ./build.sh
+6. sudo dpkg -i BUILD-timestamp/*.deb
+
+
+### Starting OpenBTS ###
+
+To start OpenBTS two things have to be done.
+First, the FPGA has to be loaded by running either:
+    bladeRF-cli -l openbts/TransceiverRAD1/hostedx115bts.rbf
+    bladeRF-cli -l openbts/TransceiverRAD1/hostedx40bts.rbf
+
+Second, OpenBTS has to be started as a service or as a stand-alone application. Following the instructions given by RangeNetworks should be pretty straight forward https://github.com/RangeNetworks/dev/wiki#running . Alternatively, it is possible to run OpenBTS directly from the Github checkout directory if all dependencies are installed. You can do this by running the following commands:
+
+1. cd openbts/apps
+2. ln -sf ../TransceiverRAD1/transceiver transceiver
+3. sudo ./OpenBTS
+
+Once OpenBTS starts LED1 and LED3 should remain solid, and LED2 should start blinking at roughly 4Hz.
+
+The remainig README content is taken directly from the https://github.com/RangeNetworks/dev repository.
+
 Development Environment
 =========
 
